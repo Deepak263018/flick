@@ -174,7 +174,7 @@ module Flick
         command = "md5sum"
       end
       files = %x(adb -s #{udid} shell "#{command} #{dir_name}/#{type}*")
-      hash = files.split("\r\n").map { |file| { md5: file.match(/(.*) /)[1].strip, file: file.match(/ (.*)/)[1].strip } }
+      hash = files.split(/[\r\n]+/).map { |file| { md5: file.match(/(.*) /)[1].strip, file: file.match(/ (.*)/)[1].strip } }
       hash.uniq! { |e| e[:md5] }
       hash.map { |file| file[:file] }
     end
