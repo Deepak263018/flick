@@ -3,7 +3,7 @@ require_relative '../lib/flick'
 require 'commander/import'
 require 'digest'
 
-program :version, '0.4.5'
+program :version, '0.4.6'
 program :description, 'A CLI to capture screenshots, video, logs, and device info for Android (Devices & Emulators) and iOS (Devices).'
 
 command :video do |c|
@@ -15,7 +15,7 @@ command :video do |c|
   c.option '-u', '--udid UDID', String, 'Set device UDID. Defaults to only connected device per platform'
   c.option '-s', '--seconds SECONDS', String, 'Set the seconds per screenshot. Default: 0.5'
   c.option '-c', '--count COUNT', Integer, 'Set maximum number of screenshots. Default: 500'
-  c.option '-e', '--extend EXTEND', 'Extend android video past 180 seconds SDK limit. (REAL devices only - OS > 4.4). Default: false'
+  c.option '-e', '--extend EXTEND', 'Extend android video past 180 seconds SDK limit. e.g. -e true .Default: false'
   #The options below are relavent to the stop action...
   c.option '-n', '--name NAME', String, 'Set name of output file, Default: UDID'
   c.option '-q', '--unique UNIQUE', 'Pull only unique screenshots. Significantly speeds up the pulling process. Default: true'
