@@ -94,7 +94,7 @@ class Video
     Flick::System.kill_process "video", udid
     sleep 5 #wait for video process to finish
     driver.pull_files "video"
-	files = Dir.glob("#{driver.flick_dir}/video-#{udid}*.mp4").sort
+	  files = Dir.glob("#{driver.flick_dir}/video-#{udid}*.mp4").sort
     return if files.empty?
     files.each { |file| system("mp4box -cat #{file} #{driver.flick_dir}/#{driver.name}.mp4") }
     puts "Saving to #{driver.outdir}/#{driver.name}.#{format}"
