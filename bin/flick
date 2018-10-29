@@ -22,6 +22,7 @@ command :video do |c|
   c.option '-f', '--format FORMAT', String, 'Set output format (mp4 or gif). Default: mp4'
   c.option '-r', '--rate RATE', String, 'Set the framerate (in seconds) when converting screenshots to video. Default: 1'
   c.option '-o', '--outdir OUTDIR', String, "Set output directory. Default is #{Dir.pwd}"
+  c.option '--use_screenshots', "Use screenshot instead of screenrecord to create final video. Use it on devices with limited space. Default: false"
   c.action do |args, options|
     options.default \
     :seconds => 0.5, #Seconds per screenshot.
@@ -30,7 +31,8 @@ command :video do |c|
     :extend => false, #Extend android video recording (for REAL devices and os >= 4.4) past 180 seconds.
     :unique => true, #defaults to pulling only unique screenshots. Speeds up pulling process from device.
     :format => "mp4",
-    :outdir => Dir.pwd #defaults to save in current directory.
+    :outdir => Dir.pwd, #defaults to save in current directory.
+	:use_screenshots => false # By default use screenrecord to record Android activity
     Video.new(options.default).run
   end
 end

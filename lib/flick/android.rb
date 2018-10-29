@@ -1,6 +1,6 @@
 module Flick
   class Android
-    attr_accessor :udid, :flick_dir, :dir_name, :name, :outdir, :unique, :limit, :specs, :size
+    attr_accessor :udid, :flick_dir, :dir_name, :name, :outdir, :unique, :limit, :specs, :size, :use_screenshots
 
     def initialize options
       Flick::Checker.system_dependency "adb"
@@ -17,7 +17,8 @@ module Flick
       self.limit = options.fetch(:limit, 180)
       self.specs = options.fetch(:specs, false)
       self.size = options.fetch(:size, "720x1280")
-      create_flick_dirs
+	    self.use_screenshots = options.fetch(:use_screenshots, false)
+	    create_flick_dirs
     end
 
     def remove_bad_characters string
@@ -152,11 +153,15 @@ module Flick
     end
 
     def recordable?
-      if info[:manufacturer] == "Genymotion"
+      if genymotion? || use_screenshots
         return false
       else
         %x(adb -s #{udid} shell "ls /system/bin/screenrecord").strip == "/system/bin/screenrecord"
       end
+    end
+
+    def genymotion?
+      info[:manufacturer] == "Genymotion"
     end
 
     def screenrecord name
