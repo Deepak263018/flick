@@ -62,6 +62,7 @@ command :applitools do |c|
   c.option '--keep', "Keep image after capture."
   c.option '--appName appName', String, "Set your App Name. Example: --appName Twitter. Default is the platform value"
   c.option '--testName testName', String, "Set Test Name. Example: --testName 'Home View'"
+  c.option '--tag Tag', String, "Set your Tag Name. Example: --tag MyTag. Default is the UUID value"
   c.option '--autoSave autoSave', String, "Automatically save failed tests."
   c.option '--apiKey apiKey', String, "Applitools API Key"
   c.option '--showLogs showLogs', String, "Display Applitools Logs"
